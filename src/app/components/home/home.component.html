@@ -1,0 +1,5 @@
+<app-loading *ngIf="!loading"></app-loading>
+
+<app-error [message]="mensaje" *ngIf="error"></app-error>
+
+<app-tarjetas [items]="nuevasCanciones"></app-tarjetas>

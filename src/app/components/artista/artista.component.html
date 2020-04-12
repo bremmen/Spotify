@@ -1,0 +1,74 @@
+<app-loading *ngIf="loading" class="mt-5 animated fadeIn"></app-loading>
+
+<div *ngIf="!loading" class="row mt-5 align-items-center animated fadeIn">
+    <div class="col-md-4 text-center">
+        <img [src]="artista.images | noImage" alt="" class="img-circle img-fluid">
+    </div>
+    <div class="col text-center mt-3">
+        <h3>{{artista.name}} </h3>
+        <span *ngFor="let genero of artista.genres" class="badge badge-success p-2 my-2"> {{genero}} </span>
+        <p>Followers<span class="badge badge-danger p-2 my-2">{{artista.followers.total | number }} </span></p>
+        <p>Popularity<span class="badge badge-primary p-2 my-2">{{artista.popularity}} </span></p>
+        <p>
+            <a [href]="artista.external_urls.spotify" target="_blank">
+                Ir a la pagina del artista
+            </a>
+        </p>
+    </div>
+    <div class="col-md-4 text-center  text-md-right">
+        <button routerLink="/search" class="btn btn-outline-success my-3">Buscar artista</button>
+    </div>
+</div>
+
+<div class=" d-none d-md-block row animated fadeIn">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>FOTO</th>
+                    <th>ALBUM</th>
+                    <th>CANCIÓN</th>
+                    <th>VISTA PREVIA</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of topTracks">
+                    <th>
+                        <img [src]="item.album.images | noImage" class="img-thumb " alt="">
+                    </th>
+                    <th>{{item.album.name}} </th>
+                    <th>{{item.name}} </th>
+                    <th>
+                        <audio [src]="item.preview_url" controls></audio>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class=" d-block d-md-none row animated fadeIn">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>CANCIÓN</th>
+                    <th>VISTA PREVIA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of topTracks">
+                    <th>
+                        {{item.name | shortText}}
+                        <br>
+                        <img [src]="item.album.images | noImage" class="img-thumb " alt="">
+                    </th>
+                    <th>
+                        <audio class="mt-2" [src]="item.preview_url" controls></audio>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
